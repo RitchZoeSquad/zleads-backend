@@ -149,7 +149,7 @@ const forgetPassword = asyncHandler(async (req, res) => {
     // Find the user by email
     const user = await users.findOne({ email });
     if (!user) {
-      return res.status(401).json({ success: false, message: 'Invalid email or password' });
+      return res.status(200).json({ success: false, message: 'User not found !' });
     }
     const code=crypto.randomBytes(32).toString('hex')
 

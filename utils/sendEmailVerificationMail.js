@@ -88,7 +88,7 @@ const sendEmail = async (email, code) => {
             <p class="message">Please verify your email address to get started.</p>
             <p class="token">Verification Token: <strong>${code}</strong></p>
             <p class="expiry">This code will expire in 10 minutes.</p>
-            <a   href=http://localhost:3000/verifyemail >Verify Email</a>
+            <a   href=${process.env.REACT_URL}/verifyemail >Verify Email</a>
             <p class="instructions">To complete your email verification:</p>
             <ol class="instructions">
                 <li>Follow the "Verify Email" link above.</li>

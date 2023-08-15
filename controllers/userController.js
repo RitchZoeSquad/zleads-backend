@@ -6,6 +6,8 @@ const sendEmail =require( "../utils/sendEmailVerificationMail.js")
 const otpGenerator = require('otp-generator');
 const sendForgetMail = require("../utils/sendForgetPaswordEmail.js")
 const crypto=require("crypto")
+const fs = require('fs');
+const path = require("path")
   const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   if (!email || !name || !password) {
@@ -119,17 +121,32 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 
 const updateUserProfile = asyncHandler(async (req, res) => {
+
+  const { name, country, province, city, bio, twilio_api, google_api } = req.body;
   const user = await users.findById(req.user._id);
   if (user) {
-    var hashedpassword=user.password;
-    if (req.body.password) {
-       hashedpassword = await bcrypt.hash(req.body.password, 10);
 
+    if(req.file  && `images/${req.user._id}${req.file.originalname}`!==user.profilePhoto){
+      const filePath = path.join(__dirname, '..', 'public', user.profilePhoto);
+
+fs.unlink(filePath, (err) => {
+  if (err) {
+    console.error('Error deleting file:', err);
+  } else {
+    console.log('File deleted successfully');
+  }
+});
     }
- 
   const t=await users.findByIdAndUpdate(req.user._id,{
-        name:req.body.name,
-        password:hashedpassword})
+        name:name,
+        country:country,
+        city:city,
+        Province:province,
+        profilePhoto:req.file?`images/${req.user._id}${req.file.originalname}`:user.profilePhoto,
+        bio:bio,
+        twilio_api:twilio_api,
+        google_api:google_api
+      },  { new: true }).select('-password')
 
     res.json({
       success: true,

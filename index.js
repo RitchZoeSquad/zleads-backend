@@ -14,9 +14,6 @@ connectDB();
 
   const app = express();    
 
-app.get("/",(req,res)=>{
-  res.status(200).json({"success":true,"message":"server is working fine"})
-})
   // Middleware
 app.use(cors({origin:process.env.REACT_URL,credentials:true}))
 
@@ -24,6 +21,12 @@ app.use(cors({origin:process.env.REACT_URL,credentials:true}))
   app.use(cp());
   app.use(express.static("public"))
   // API Routes
+
+  
+app.get("/",(req,res)=>{
+  res.status(200).json({"success":true,"message":"server is working fine"})
+})
+
   app.use('/api/users', userRoutes);
 
   // Error handling middleware

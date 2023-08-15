@@ -73,8 +73,7 @@ const authUser = asyncHandler(
           path: "/",
           expires: new Date(Date.now() + 1000 * 36000),
           httpOnly: true,
-          sameSite: "none",
-          secure:true
+          sameSite: "lax",
         });
         res.status(200).json({ success: true, message: user, token: token });
       } 

@@ -73,8 +73,8 @@ const authUser = asyncHandler(
           path: "/",
           expires: new Date(Date.now() + 1000 * 36000),
           httpOnly: true,
-          secure:true,
           sameSite: "none",
+          secure:true
         });
         res.status(200).json({ success: true, message: user, token: token });
       } 
@@ -126,7 +126,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await users.findById(req.user._id);
   if (user) {
 
-    if(req.file  && `images/${req.user._id}${req.file.originalname}`!==user.profilePhoto){
+    if(req.file  && `images/${req.user._id}${req.file.originalname}`!==user.profilePhoto && user.profilePhoto!=="images/user.png"){
       const filePath = path.join(__dirname, '..', 'public', user.profilePhoto);
 
 fs.unlink(filePath, (err) => {

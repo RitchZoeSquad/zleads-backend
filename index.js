@@ -1,16 +1,12 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
 const userRoutes = require('./routes/userRoutes');
+const leadsRoutes = require('./routes/leadsRoutes');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const cp = require('cookie-parser');
 const cors = require('cors');
-const connectDB = require('./config/db');
 
 
-connectDB();
-
-
-// Connect to MongoDB database
 
   const app = express();    
 
@@ -28,6 +24,7 @@ app.get("/",(req,res)=>{
 })
 
   app.use('/api/users', userRoutes);
+  app.use('/api/services', leadsRoutes);
 
   // Error handling middleware
   app.use(errorHandler);

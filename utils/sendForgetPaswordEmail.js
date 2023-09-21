@@ -81,7 +81,7 @@ const sendForgetMail = async (email, code) => {
         <div class="container">
             <h1 class="title">Zleads - Password Reset</h1>
             <p class="message">You have requested to reset your password.</p>
-          <a     href=${process.env.REACT_URL}/resetpassword/${code} >Reset Password</a>
+          <a     href=${process.env.REACT_URL}/resetpassword/${code}?email=${email}  >Reset Password</a>
             <p class="expiry">This link is valid for a 10 minutes only.</p>
             <p class="note">If you didn't request this password reset, no further action is needed.</p>
         </div>

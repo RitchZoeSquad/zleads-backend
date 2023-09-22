@@ -1,7 +1,7 @@
 const axios = require("axios");
 const asyncHandler = require("express-async-handler")
-const data = require("../data/GoogleApiResponse.json")
-const outscraperData = require("../data/OutscraperResponse.json")
+// const data = require("../data/GoogleApiResponse.json")
+// const outscraperData = require("../data/OutscraperResponse.json")
 const XLSX = require("xlsx");
 const uuid = require('uuid'); // Import the uuid package
 const dynamodb = require("../config/db");
